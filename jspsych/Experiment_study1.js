@@ -371,8 +371,6 @@ const experiment_id = "hTRsJXElIgGL";
 // Your OSF token
 // const osfToken = 'VLFG5mbOACd0fk6jkN1IhAwbdrCi8OSm62rzTqPBreN3asR5QCcIeTBz9YkwJy1WL9CkNp';
 
-// Determine condition
-let condition = randomVariable < 0.5 ? "two-step" : "single-step";
 
 jsPsych.data.addProperties({
   subject_id: subject_id,
