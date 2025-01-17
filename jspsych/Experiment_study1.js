@@ -33,9 +33,9 @@ var welcome = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
     "<h1 class ='custom-title'>Welcome</h1>" +
-    "<p class='instructions'>TEST Thank you for taking part in this survey. <b> Please note that you can only participate from a computer.</b> </p>" +
+    "<p class='instructions'>TEST 2 Thank you for taking part in this survey. <b> Please note that you can only participate from a computer.</b> </p>" +
     "<p class='instructions'>We are going to ask you to imagine you are a medical researcher who wants to test the effectiveness of a medicine against a fictitious disease. " +
-    "Your task will be to give your opinion on the effectiveness of this medicine. You will also have to answer some questions about your worldview.</p>" +
+    "Your task will be to give your opinion on the effectiveness of this medicine.</p>" +
     "<p class='instructions'>If you have any question related to this research, please " +
     "send a message on Prolific. </p>" +
 
@@ -367,13 +367,17 @@ const experiment_id = "hTRsJXElIgGL";
 // Your OSF token
 // const osfToken = 'VLFG5mbOACd0fk6jkN1IhAwbdrCi8OSm62rzTqPBreN3asR5QCcIeTBz9YkwJy1WL9CkNp';
 
+// Determine condition
+let condition = randomVariable < 0.5 ? "two-step" : "single-step";
+
 jsPsych.data.addProperties({
   subject_id: subject_id,
   prolific_id: prolific_id,
   study_id: study_id,
   session_id: session_id,
   stim_randomization: stim_randomization,
-  button_randomization: button_randomization
+  button_randomization: button_randomization,
+  condition: condition // Save the condition
 })
 
 var save_data = {
@@ -387,38 +391,23 @@ var save_data = {
 
 // modifications
 
-timeline.push 
-  (
+timeline.push(
   browser_check,
   welcome,
   consent,
   consigne,
   procedure_testing
-  );
+);
 
-// Étape 1 : Génération de la variable aléatoire
-let randomVariable = Math.random(); // Un nombre entre 0 et 1
-let selectedTimeline; // La timeline à utiliser
-
-// Étape 2 : Définir les timelines possibles
-if (randomVariable < 0.5) {
-    selectedTimeline = [
-
-      question,
-      conditional_slider,
-      
-    ];
+// Add conditionally chosen timeline
+if (condition === "two-step") {
+  timeline.push(question, conditional_slider); // Two-step condition
 } else {
-    selectedTimeline = [
-      slider,
-    ];
+  timeline.push(slider); // Single-step condition
 }
 
-// Ajouter la timeline conditionnelle
-timeline = timeline.concat(selectedTimeline);
-
-timeline.push 
-  (
+// Add the remaining trials
+timeline.push(
   confidence,
   attention_check,
   instruction_demographic_questionnary,
@@ -426,8 +415,9 @@ timeline.push
   age,
   comment,
   waiting_demand,
-  save_data, 
-  prolific 
-)
+  save_data,
+  prolific
+);
 
+// Run the experiment
 jsPsych.run(timeline);
