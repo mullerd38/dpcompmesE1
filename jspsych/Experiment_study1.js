@@ -393,7 +393,7 @@ timeline.push
   welcome,
   consent,
   consigne,
-  //procedure_testing,
+  procedure_testing
   );
 
 // Étape 1 : Génération de la variable aléatoire
