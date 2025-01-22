@@ -233,11 +233,11 @@ var slider = {
     var questionText = "";
     if (response == "Patients are more likely to recover after receiving the medicine") {
       questionText = "<p class='instructions'>You just said patients are better off to receive the medicine than the placebo.<br>" +
-      "To be more specific, to what extent do you think people are more likely to get better with the medicine (instead of the placebo)?</p>" +
+      "To be more specific, to what extent do you think patients are more likely to get better with the medicine (instead of the placebo)?</p>" +
       "<em>(If you want to answer 1, simply click on the handle.)</em>";
     } else if (response == "Patients are more likely to recover after receiving the placebo") {
       questionText = "<p class='instructions'>You just said patients are better off to receive the placebo than the medicine.<br>" +
-      "To be more specific, to what extent do you think people are more likely to get better with the placebo (instead of the medicine)?</p>" +
+      "To be more specific, to what extent do you think patients are more likely to get better with the placebo (instead of the medicine)?</p>" +
       "<em>(If you want to answer 1, simply click on the handle.)</em>";
     } else {
       questionText = "Erreur : réponse inattendue." + response;
